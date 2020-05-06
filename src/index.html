@@ -10,17 +10,199 @@
   <link rel="manifest" href="site.webmanifest">
   <link rel="apple-touch-icon" href="icon.png">
   <!-- Place favicon.ico in the root directory -->
-
-  <link rel="stylesheet" href="css/normalize.css">
-  <link rel="stylesheet" href="css/main.css">
+  
+  <!-- <link rel="stylesheet" href="css/normalize.css">
+  <link rel="stylesheet" href="css/main.css"> -->
+  <link rel="stylesheet" type="text/css" href="css/devices.css" />
 
   <meta name="theme-color" content="#fafafa">
 </head>
 
 <body>
+  <style>
+    .device  {
+      margin: auto;
+      margin-bottom: 40px;
+    }
+  
+    .device .device-content {
+      overflow: hidden;
+      background: #fff;  /* fallback for old browsers */
+      /* background: -webkit-linear-gradient(to right, #29323c, #485563);  /* Chrome 10-25, Safari 5.1-6 */
+      /* background: linear-gradient(to right, #29323c, #485563); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+      /* background-image: url('img/mockuphone-iphonex-example.png'); */
+  
+      background-size: contain;
+      background-position: center;
+      background-repeat: no-repeat;
+    }
+  
+    body {
+      background: #f3f3f3;
+      font-family: 'lato', 'Arial', sans-serif;
+      text-align: center;
+      padding: 0;
+      margin: 0;
+    }
+    .mup-container{
+      width: 100%;
+      margin: auto;
+      max-width: 400px;
+  
+    }
+  
+    h1 {
+      color: #134E5E;
+      font-weight: 400;
+      font-size: 30px;
+      margin: 20px;
+    }
+    .instructions {
+      color: #666;
+    }
+  
+  
+    .drop-text {
+      z-index: 10;
+      width: 200px;
+      padding: 4px;
+      border-radius: 4px;
+      margin: auto;
+      top: 300px;
+      position: relative;
+      cursor: pointer;
+      color: #aaa;
+      background: rgba(0,0,0,0.1);
+    }
+  
+    footer {
+      background: #134E5E;  /* fallback for old browsers */
+      background: -webkit-linear-gradient(to right, #71B280, #134E5E);  /* Chrome 10-25, Safari 5.1-6 */
+      background: linear-gradient(to right, #71B280, #134E5E); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+    
+      padding: 20px;
+      min-height: 20px;
+    /*  position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      z-index: 15;*/
+      color: #eee;
+    }
+  
+    footer a {
+      color: #53e0b9;
+    }
+  
+    @-webkit-keyframes bummer {
+        100% {
+            -webkit-transform: scale(1,1);
+        }
+    }
+  
+    @keyframes bummer {
+        100% {
+            transform: scale(1,1);
+        }
+    }
+  
+    .animate {
+      -webkit-animation: bummer 0.6s;
+      animation: bummer 0.6s;
+      -webkit-transform: scale(0.3,0.3); 
+      transform: scale(0.3,0.3);
+      -webkit-animation-fill-mode: forwards;
+      animation-fill-mode: forwards;
+    }
+  
+    .animate-bg {
+      -webkit-transition: background-image 0.1s ease-in;
+      -moz-transition: background-image 0.1s ease-in;
+      -ms-transition: background-image 0.1s ease-in;
+      transition: background-image 0.1s ease-in;
+  
+      -webkit-transition: background 0.1s ease-in;
+      -moz-transition: background 0.1s ease-in;
+      -ms-transition: background 0.1s ease-in;
+      transition: background 0.1s ease-in;
+    }
+
+    .avatar-bar {
+      text-align: left;
+    }
+
+    .avatar-bar .avatar-img {
+      display: inline-block;
+      margin-left: 10px;
+    }
+
+    .avatar-bar .avatar-text {
+      display: inline-block;
+      margin-left: 20px;
+    }
+
+    .avatar-text p {
+      margin-block-start: 0.2em;
+      margin-block-end: 0.2em;
+    }
+  
+  </style>
 
   <!-- Add your site or application content here -->
-  <p>Hello world! This is HTML5 Boilerplate.</p>
+  
+  <h1>Instant iPhone X mockup.</h1>
+        <p class="instructions">
+    Best effect for 1125px x 2436px images. <br>For example this one: <a href="mockuphone-iphonex-example.png" target="_blank" download>download.</a> </p>
+  <div id="mup-container">
+    <div id="iphone-x" class="container grid-xl text-center">
+      <div class="columns">
+        <div class="column col-12">
+          <div class="device device-iphone-x animate">
+            <div class="device-frame">
+              <div class="device-content">
+                <div class="device-safe-area">
+                  <div class="avatar-bar">
+                    <div class="avatar-img">
+                      <img src="img/home-icon/avatar.png" alt="Couldn't get your avatar" width="35" height="35"
+                        padding-left="1">
+                    </div>
+                    <div class="avatar-text">
+                      <p>Xin chào Nguyễn Văn A!</p>
+                    </div>
+                    <hr>
+                  </div>
+                </div>
+                <section class="hero is-info is-fullheight is-bold is-centered">
+                  <div class="hero-body">
+                    <div class="container">
+                          <div id="mockChat"></div>
+                    </div>
+                  </div>
+                  <p>Chat bot section</p>
+                </section>
+              </div>
+            </div>
+            <div class="device-stripe"></div>
+            <div class="device-header"></div>
+            <div class="device-sensors"></div>
+            <div class="device-btns"></div>
+            <div class="device-power"></div>
+            <div class="device-home"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <footer>📱 Powered by <a target="_blank" href="https://mockuphone.com"> MockUPhone</a> ← see more mockups
+  | 🍺 Credits to <a href="https://github.com/picturepan2/devices.css">devices.css</a> | <a href="https://github.com/oursky/iphone-x-mockup/">GitHub</a> </footer>
+
+  <script src="http://zeptojs.com/zepto.min.js"></script>
+
+
+
+
   <script src="js/vendor/modernizr-{{MODERNIZR_VERSION}}.min.js"></script>
   <script src="https://code.jquery.com/jquery-{{JQUERY_VERSION}}.min.js" integrity="{{JQUERY_SRI_HASH}}" crossorigin="anonymous"></script>
   <script>window.jQuery || document.write('<script src="js/vendor/jquery-{{JQUERY_VERSION}}.min.js"><\/script>')</script>
