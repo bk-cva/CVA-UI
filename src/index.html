@@ -10,7 +10,7 @@
   <link rel="manifest" href="site.webmanifest">
   <link rel="apple-touch-icon" href="icon.png">
   <!-- Place favicon.ico in the root directory -->
-  
+
   <!-- <link rel="stylesheet" href="css/normalize.css">
   <link rel="stylesheet" href="css/main.css"> -->
   <link rel="stylesheet" type="text/css" href="css/devices.css" />
@@ -22,21 +22,22 @@
   <style>
     .device  {
       margin: auto;
+      margin-top: 40px;
       margin-bottom: 40px;
     }
-  
+
     .device .device-content {
       overflow: hidden;
-      background: #fff;  /* fallback for old browsers */
+      background: rgb(241, 238, 238);  /* fallback for old browsers */
       /* background: -webkit-linear-gradient(to right, #29323c, #485563);  /* Chrome 10-25, Safari 5.1-6 */
       /* background: linear-gradient(to right, #29323c, #485563); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
       /* background-image: url('img/mockuphone-iphonex-example.png'); */
-  
+
       background-size: contain;
       background-position: center;
       background-repeat: no-repeat;
     }
-  
+
     body {
       background: #f3f3f3;
       font-family: 'lato', 'Arial', sans-serif;
@@ -45,12 +46,12 @@
       margin: 0;
     }
     .mup-container{
-      width: 100%;
+      /* width: 100%; */
       margin: auto;
       max-width: 400px;
-  
+
     }
-  
+
     h1 {
       color: #134E5E;
       font-weight: 400;
@@ -60,8 +61,7 @@
     .instructions {
       color: #666;
     }
-  
-  
+
     .drop-text {
       z-index: 10;
       width: 200px;
@@ -74,53 +74,34 @@
       color: #aaa;
       background: rgba(0,0,0,0.1);
     }
-  
-    footer {
-      background: #134E5E;  /* fallback for old browsers */
-      background: -webkit-linear-gradient(to right, #71B280, #134E5E);  /* Chrome 10-25, Safari 5.1-6 */
-      background: linear-gradient(to right, #71B280, #134E5E); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
-    
-      padding: 20px;
-      min-height: 20px;
-    /*  position: fixed;
-      bottom: 0;
-      left: 0;
-      right: 0;
-      z-index: 15;*/
-      color: #eee;
-    }
-  
-    footer a {
-      color: #53e0b9;
-    }
-  
+
     @-webkit-keyframes bummer {
         100% {
             -webkit-transform: scale(1,1);
         }
     }
-  
+
     @keyframes bummer {
         100% {
             transform: scale(1,1);
         }
     }
-  
+
     .animate {
       -webkit-animation: bummer 0.6s;
       animation: bummer 0.6s;
-      -webkit-transform: scale(0.3,0.3); 
+      -webkit-transform: scale(0.3,0.3);
       transform: scale(0.3,0.3);
       -webkit-animation-fill-mode: forwards;
       animation-fill-mode: forwards;
     }
-  
+
     .animate-bg {
       -webkit-transition: background-image 0.1s ease-in;
       -moz-transition: background-image 0.1s ease-in;
       -ms-transition: background-image 0.1s ease-in;
       transition: background-image 0.1s ease-in;
-  
+
       -webkit-transition: background 0.1s ease-in;
       -moz-transition: background 0.1s ease-in;
       -ms-transition: background 0.1s ease-in;
@@ -134,6 +115,7 @@
     .avatar-bar .avatar-img {
       display: inline-block;
       margin-left: 10px;
+      margin-right: 70px;
     }
 
     .avatar-bar .avatar-text {
@@ -145,14 +127,206 @@
       margin-block-start: 0.2em;
       margin-block-end: 0.2em;
     }
-  
+
+    .mockchat,
+    .mockchat *,
+    .mockchat *:after,
+    .mockchat *:before {
+      box-sizing: border-box;
+    }
+
+    .mockchat {
+      position: relative;
+      color: #283747;
+      max-width: 300px;
+      margin: 0 auto;
+      height: auto;
+      line-height: 1.25;
+      perspective: 900px;
+      font-family: BlinkMacSystemFont, -apple-system, "Segoe UI", "Roboto", "Oxygen",
+        "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
+        "Helvetica", "Arial", sans-serif;
+    }
+
+    .reply {
+      transform-origin: 100% 50%;
+      margin: 0.25em 0 0.25em 1.5em !important;
+      width: calc(100% - 3em);
+      background: white;
+      border-radius: 1.5em;
+      position: relative;
+      padding: 0.75em 1em;
+      box-shadow: 0 1px 10px rgba(black, 0.08);
+      opacity: 0;
+      transform: translateY(2em)scale(0.5);
+      animation: mockchat-reply-pop cubic-bezier(0, 0.81, 0.58, 1.2) 0.4s;
+      animation-fill-mode: forwards;
+      text-align: right;
+      transition: all 0.3s;
+      max-height: 0;
+    }
+
+    .reply:nth-child(2n - 1) {
+      transform-origin: 0 50%;
+      margin: 0.25em 1.5em 0.25em 1.5em !important;
+      width: calc(100% - 3em);
+      background: #1446A0;
+      color: white;
+      text-align: left;
+    }
+
+    .reply:nth-child(2n - 1)::after {
+      display: block;
+      content: "";
+      background: #58D68D;
+      position: absolute;
+      height: 0.75em;
+      width: 0.75em;
+      left: -1.5em;
+      top: 1.375em;
+      border-radius: 99999px;
+      font-size: 0.75em;
+      display: flex;
+      flex-wrap: wrap;
+      text-align: center;
+      justify-content: center;
+      align-items: center;
+      line-height: 1;
+      font-weight: bold;
+    }
+
+    .reply.dots {
+      transform-origin: 50% 50%;
+      margin: 0.25em 35% 0.25em 35% !important;
+      max-width: 30%;
+      text-align: center;
+      font-size: 1rem;
+      line-height: 1;
+    }
+
+    .reply .dots::after {
+      display: none;
+    }
+
+    .reply .dots span {
+      display: block;
+      height: 4px;
+      width: 4px;
+      background: currentColor;
+      display: inline-block;
+      border-radius: 99999px;
+      margin: 0.25em 0.15em;
+      opacity: 0;
+      animation: mockchat-dots 0.5s infinite alternate;
+      transform: translateY(0.25em);
+    }
+
+    .reply .dots span:nth-child(2){
+      animation-delay: 0.1s;
+    }
+
+    .reply .dots span:nth-child(3){
+      animation-delay: 0.2s;
+    }
+
+    .mockchat .device-content {
+      width: 100%;
+      margin: 0 auto;
+      background: #F8C7CC;
+      padding-top: 200%;
+      border-radius: 50px;
+      box-shadow: 0 10px 40px rgba(#283747, .4);
+      position: relative;
+      background: #283747;
+      transition: all .5s;
+    }
+
+    .mockchat .device-content::before {
+      display: block;
+      content: "";
+      position: absolute;
+      height: 4%;
+      width: 40%;
+      background: #283747;
+      top: 10px;
+      left: 30%;
+      border-radius: 0 0 10px 10px;
+      z-index: 3;
+      border-top: transparent;
+    }
+    .mockchat .device-content::after {
+      display: block;
+      content: "";
+      position: absolute;
+      height: 1%;
+      width: 15%;
+      background: darken(#283747, 10%);
+      border-radius: 100px;
+      top: 18px;
+      left: 42.5%;
+      z-index: 3;
+      border-top: transparent;
+    }
+
+    .mockchat .screen {
+      position: absolute;
+      width: calc(100% - 20px);
+      height: calc(100% - 20px);;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background: #FCF7FF;
+      background-image: linear-gradient(#FCF7FF, lighten(#283747, 70%));
+      box-shadow: inset 0 0 40px rgba(white, .7),
+                  0 0 0 5px rgba(white, .15);
+      border-radius: 40px;
+      overflow: hidden;
+    }
+
+    .app {
+      width: 100%;
+      max-width: 100%;
+      height: auto;
+      position: relative;
+      top: 0;
+      left: 0;
+      display: flex;
+      align-content: flex-end;
+      align-items: flex-end;
+      flex-wrap: wrap;
+      flex-direction: column;
+      padding: 1em;
+      overflow-y: scroll;
+      transition: all 0.3s;
+      margin-top: 5%;
+    }
+
+    @keyframes mockchat-dots {
+      to {
+        transform: translateY(-0.2em);
+        opacity: 1;
+      }
+    }
+
+    @keyframes mockchat-blink {
+      to {
+        opacity: 1;
+      }
+    }
+
+    @keyframes mockchat-reply-pop {
+      to {
+        transform: none;
+        font-size: 1rem;
+        opacity: 1;
+        max-height: 200px;
+      }
+    }
+
+
   </style>
 
   <!-- Add your site or application content here -->
-  
-  <h1>Instant iPhone X mockup.</h1>
-        <p class="instructions">
-    Best effect for 1125px x 2436px images. <br>For example this one: <a href="mockuphone-iphonex-example.png" target="_blank" download>download.</a> </p>
   <div id="mup-container">
     <div id="iphone-x" class="container grid-xl text-center">
       <div class="columns">
@@ -171,15 +345,15 @@
                     </div>
                     <hr>
                   </div>
-                </div>
-                <section class="hero is-info is-fullheight is-bold is-centered">
-                  <div class="hero-body">
-                    <div class="container">
-                          <div id="mockChat"></div>
+                  <section class="hero is-info is-fullheight is-bold is-centered">
+                    <!-- <p>Chat bot section</p> -->
+                    <div class="app">
+                      <div class="reply">Hey siri!</div>
+                      <div class="reply">Xin chào, mình có thể giúp gì cho bạn?</div>
+                      <div class="reply">Tôi muốn đi siêu thị</div>
                     </div>
-                  </div>
-                  <p>Chat bot section</p>
-                </section>
+                  </section>
+                </div>
               </div>
             </div>
             <div class="device-stripe"></div>
@@ -195,17 +369,12 @@
 
   </div>
 
-  <footer>📱 Powered by <a target="_blank" href="https://mockuphone.com"> MockUPhone</a> ← see more mockups
-  | 🍺 Credits to <a href="https://github.com/picturepan2/devices.css">devices.css</a> | <a href="https://github.com/oursky/iphone-x-mockup/">GitHub</a> </footer>
+  <!-- <script src="js/conversation.js"></script> -->
 
   <script src="http://zeptojs.com/zepto.min.js"></script>
-
-
-
-
-  <script src="js/vendor/modernizr-{{MODERNIZR_VERSION}}.min.js"></script>
-  <script src="https://code.jquery.com/jquery-{{JQUERY_VERSION}}.min.js" integrity="{{JQUERY_SRI_HASH}}" crossorigin="anonymous"></script>
-  <script>window.jQuery || document.write('<script src="js/vendor/jquery-{{JQUERY_VERSION}}.min.js"><\/script>')</script>
+  <!-- <script src="js/vendor/modernizr-{{MODERNIZR_VERSION}}.min.js"></script> -->
+  <!-- <script src="https://code.jquery.com/jquery-{{JQUERY_VERSION}}.min.js" integrity="{{JQUERY_SRI_HASH}}" crossorigin="anonymous"></script> -->
+  <!-- <script>window.jQuery || document.write('<script src="js/vendor/jquery-{{JQUERY_VERSION}}.min.js"><\/script>')</script> -->
   <script src="js/plugins.js"></script>
   <script src="js/main.js"></script>
 
