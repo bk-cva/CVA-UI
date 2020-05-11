@@ -1,0 +1,453 @@
+<!doctype html>
+<html class="no-js" lang="">
+
+<head>
+  <meta charset="utf-8">
+  <title></title>
+  <meta name="description" content="">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <link rel="manifest" href="site.webmanifest">
+  <link rel="apple-touch-icon" href="icon.png">
+  <!-- Place favicon.ico in the root directory -->
+
+  <!-- <link rel="stylesheet" href="css/normalize.css">
+  <link rel="stylesheet" href="css/main.css"> -->
+  <link rel="stylesheet" type="text/css" href="css/devices.css" />
+
+  <meta name="theme-color" content="#fafafa">
+</head>
+
+<body onload="startTime()">
+  <style>
+    .device  {
+      margin: auto;
+      margin-top: 40px;
+      margin-bottom: 40px;
+    }
+
+    .device .device-content {
+      overflow: hidden;
+      background: rgb(241, 238, 238);  /* fallback for old browsers */
+      /* background: -webkit-linear-gradient(to right, #29323c, #485563);  /* Chrome 10-25, Safari 5.1-6 */
+      /* background: linear-gradient(to right, #29323c, #485563); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+      /* background-image: url('img/mockuphone-iphonex-example.png'); */
+
+      background-size: contain;
+      background-position: center;
+      background-repeat: no-repeat;
+    }
+
+    body {
+      background: #f3f3f3;
+      font-family: 'lato', 'Arial', sans-serif;
+      text-align: center;
+      padding: 0;
+      margin: 0;
+    }
+    .mup-container{
+      /* width: 100%; */
+      margin: auto;
+      max-width: 400px;
+
+    }
+
+    h1 {
+      color: #134E5E;
+      font-weight: 400;
+      font-size: 30px;
+      margin: 20px;
+    }
+    .instructions {
+      color: #666;
+    }
+
+    .drop-text {
+      z-index: 10;
+      width: 200px;
+      padding: 4px;
+      border-radius: 4px;
+      margin: auto;
+      top: 300px;
+      position: relative;
+      cursor: pointer;
+      color: #aaa;
+      background: rgba(0,0,0,0.1);
+    }
+
+    @-webkit-keyframes bummer {
+        100% {
+            -webkit-transform: scale(1,1);
+        }
+    }
+
+    @keyframes bummer {
+        100% {
+            transform: scale(1,1);
+        }
+    }
+
+    .animate {
+      -webkit-animation: bummer 0.6s;
+      animation: bummer 0.6s;
+      -webkit-transform: scale(0.3,0.3);
+      transform: scale(0.3,0.3);
+      -webkit-animation-fill-mode: forwards;
+      animation-fill-mode: forwards;
+    }
+
+    .animate-bg {
+      -webkit-transition: background-image 0.1s ease-in;
+      -moz-transition: background-image 0.1s ease-in;
+      -ms-transition: background-image 0.1s ease-in;
+      transition: background-image 0.1s ease-in;
+
+      -webkit-transition: background 0.1s ease-in;
+      -moz-transition: background 0.1s ease-in;
+      -ms-transition: background 0.1s ease-in;
+      transition: background 0.1s ease-in;
+    }
+
+    .avatar-bar {
+      text-align: left;
+    }
+
+    .avatar-bar .avatar-img {
+      display: inline-block;
+      margin-left: 10px;
+      margin-right: 70px;
+    }
+
+    .avatar-bar .avatar-text {
+      display: inline-block;
+      margin-left: 20px;
+    }
+
+    .avatar-text p {
+      margin-block-start: 0.2em;
+      margin-block-end: 0.2em;
+    }
+
+    #time-bar {
+      font-size: medium;
+    }
+
+    .container-weather {
+      width: 100%;
+      max-width: 500px;
+      margin: 0 auto;
+      padding: 0 15px;
+    }
+
+
+    /* SECTION #2
+    –––––––––––––––––––––––––––––––––––––––––––––––––– */
+    .ajax-section {
+      margin: 10px 0 20px;
+    }
+
+    .ajax-section .city {
+      display: inline-block;
+      position: relative;
+      padding: 5px 10%;
+      border-radius: 20px;
+      background: var(--text_light);
+      color: var(--text_med);
+    }
+
+    .ajax-section .city::after {
+      content: '';
+      width: 90%;
+      height: 50px;
+      position: absolute;
+      bottom: -12px;
+      left: 5%;
+      z-index: -1;
+      opacity: 0.3;
+      border-radius: 20px;
+      background: var(--text_light);
+    }
+
+    .ajax-section .city h2 {
+      margin: 0 0 0 0;
+    }
+
+    .ajax-section .city-name {
+      display: inline-block;
+      margin-top: 10px;
+      margin-bottom: 0;
+    }
+
+    .ajax-section .city sup {
+      /* padding: 0.2em 0.6em; */
+      display: inline-block;
+      border-radius: 20px;
+      color: #ebe4e4;
+      background: #fd9800;
+      width: auto;
+      font-size: 0.5em;
+      padding: 0 5px 0 5px;
+    }
+
+    .ajax-section .weather-info{
+      display: inline-block;
+      margin-left: 30px;
+    }
+
+    .ajax-section .city-temp {
+      display: inline-block;
+      font-size: 3rem;
+      font-weight: bold;
+      color: var(--text_dark);
+      text-align: left;
+      /* float: left; */
+      margin-top: 20px;
+      margin-right: 20px;
+    }
+
+    .ajax-section .city-temp span {
+      display: inline-block;
+    }
+
+    .ajax-section .city-temp sup{
+      display: inline-block;
+      border-radius: 20px;
+      color: #ebe4e4;
+      background: #fd9800;
+      padding: 0 5px 0 5px;
+    }
+
+    .ajax-section .weather-figure {
+      margin: 0 5px 0 0;
+      float: right;
+    }
+
+    .ajax-section .weather-figure img{
+      width: 4em;
+      height: auto;
+      margin-right: 20px;
+      display: inline-block;
+    }
+
+    .ajax-section .weather-caption{
+      font-size: large;
+      text-transform: uppercase;
+      width: 10em;
+      height: auto;
+    }
+
+
+    /* MQ
+    –––––––––––––––––––––––––––––––––––––––––––––––––– */
+    @media screen and (max-width: 1000px) {
+      body {
+        padding: 30px;
+      }
+    }
+
+    @media screen and (max-width: 700px) {
+      .heading,
+      .ajax-section .city-temp {
+        font-size: 3rem;
+      }
+
+      .ajax-section {
+        margin-top: 20px;
+      }
+    }
+
+    @media screen and (max-width: 500px) {
+      body {
+        padding: 15px;
+      }
+    }
+
+    .intro-text {
+      font-size: large;
+    }
+
+    .function-block {
+      text-align: left;
+      width: inherit;
+      height: auto;
+      display: block;
+    }
+
+    .function-bar {
+      /* display: inline-block; */
+    }
+
+    .function-bar img {
+      display: inline-block;
+      text-align: left;
+
+    }
+
+    .function-bar h3 {
+      display: inline-block;
+      position: absolute;
+    }
+
+    .function-bar .calendar-icon {
+      width: 4em;
+      height: auto;
+      margin-right: 40px;
+      margin-left: 10px;
+    }
+
+    .function-bar .map-icon {
+      width: 3em;
+      height: auto;
+      margin-left: 20px;
+      margin-right: 50px;
+    }
+
+    .function-bar .music-icon {
+      width: 3em;
+      height: auto;
+      margin-left: 20px;
+      margin-right: 50px;
+      margin-top: 20px;
+    }
+
+    .function-bar .music-text {
+      margin-bottom: 0;
+      margin-top: 30px;
+    }
+
+    .function-bar .car-icon {
+      width: 3em;
+      height: auto;
+      margin-left: 20px;
+      margin-right: 50px;
+      margin-top: 10px;
+    }
+
+    .function-bar .car-text {
+      margin-bottom: 0;
+      margin-top: 25px;
+    }
+
+    .function-bar .news-icon {
+      width: 3em;
+      height: auto;
+      margin-left: 20px;
+      margin-right: 50px;
+      margin-top: 10px;
+    }
+
+    .function-bar .news-text {
+      margin-bottom: 0;
+      margin-top: 25px;
+    }
+
+    .function-bar .user-icon {
+      width: 3em;
+      height: auto;
+      margin-left: 20px;
+      margin-right: 50px;
+      margin-top: 10px;
+    }
+
+    .function-bar .user-text {
+      margin-bottom: 0;
+      margin-top: 25px;
+    }
+
+    .function-table {
+      display: inline-block;
+    }
+
+  </style>
+
+  <!-- Add your site or application content here -->
+  <div id="mup-container">
+    <div id="iphone-x" class="container grid-xl text-center">
+      <div class="columns">
+        <div class="column col-12">
+          <div class="device device-iphone-x animate">
+            <div class="device-frame">
+              <div class="device-content">
+                <div class="device-safe-area">
+                  <div class="avatar-bar">
+                    <div class="avatar-img">
+                      <img src="img/home-icon/avatar.png" alt="Couldn't get your avatar" width="35" height="35"
+                        padding-left="1">
+                    </div>
+                    <div class="avatar-text">
+                      <p>Xin chào Ring Ring!</p>
+                    </div>
+                  </div>
+                  <hr>
+                  <div class="info-bar">
+                    <div id="time-bar"></div>
+                    <div id="date-bar"></div>
+                    <!-- <div class="weather-info">Weather</div> -->
+                    <section class="ajax-section">
+                      <div class="container-weather">
+                        <div class="city"></div>
+                      </div>
+                    </section>
+                  </div>
+                  <hr>
+                  <h2 class="intro-text">Hãy gọi "hey Javis" tôi có thể giúp bạn:</h2>
+                  <div class="function-block">
+                    <div class="function-bar">
+                      <img class="calendar-icon" src="img/home-icon/calendar.png" alt="Couldn't get your avatar">
+                      <h3>Quản lí lịch trình giúp bạn</h3>
+                    </div>
+                    <div class="function-bar">
+                      <img class="map-icon" src="img/home-icon/map.png" alt="Couldn't get your avatar">
+                      <h3>Tìm đường giúp bạn</h3>
+                    </div>
+                    <div class="function-bar">
+                      <img class="music-icon" src="img/home-icon/player.jpg" alt="Couldn't get your avatar">
+                      <h3 class="music-text">Chơi nhạc theo yêu cầu</h3>
+                    </div>
+                    <div class="function-bar">
+                      <img class="car-icon" src="img/home-icon/car.png" alt="Couldn't get your avatar">
+                      <h3 class="car-text">Điều khiển thiết bị trên xe</h3>
+                    </div>
+                    <div class="function-bar">
+                      <img class="news-icon" src="img/home-icon/news.jpg" alt="Couldn't get your avatar">
+                      <h3 class="news-text">Cập nhật tin tức bạn muốn</h3>
+                    </div>
+                    <div class="function-bar">
+                      <img class="user-icon" src="img/home-icon/user.png" alt="Couldn't get your avatar">
+                      <h3 class="user-text">Ghi nhớ thông tin cá nhân của bạn</h3>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="device-stripe"></div>
+            <div class="device-header"></div>
+            <div class="device-sensors"></div>
+            <div class="device-btns"></div>
+            <div class="device-power"></div>
+            <div class="device-home"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <script src="js/home-info.js"></script>
+
+  <script src="http://zeptojs.com/zepto.min.js"></script>
+  <!-- <script src="js/vendor/modernizr-{{MODERNIZR_VERSION}}.min.js"></script> -->
+  <!-- <script src="https://code.jquery.com/jquery-{{JQUERY_VERSION}}.min.js" integrity="{{JQUERY_SRI_HASH}}" crossorigin="anonymous"></script> -->
+  <!-- <script>window.jQuery || document.write('<script src="js/vendor/jquery-{{JQUERY_VERSION}}.min.js"><\/script>')</script> -->
+  <script src="js/plugins.js"></script>
+  <script src="js/main.js"></script>
+
+  <!-- Google Analytics: change UA-XXXXX-Y to be your site's ID. -->
+  <script>
+    window.ga = function () { ga.q.push(arguments) }; ga.q = []; ga.l = +new Date;
+    ga('create', 'UA-XXXXX-Y', 'auto'); ga('set', 'anonymizeIp', true); ga('set','transport','beacon'); ga('send', 'pageview')
+  </script>
+  <script src="https://www.google-analytics.com/analytics.js" async></script>
+</body>
+
+</html>
