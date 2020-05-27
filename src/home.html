@@ -442,6 +442,33 @@
   <script src="js/plugins.js"></script>
   <script src="js/main.js"></script>
 
+  <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+  <script>
+    var ws = new WebSocket("ws://192.168.0.171:5000/");
+    ws.onmessage = function (event) {
+      var reader = new FileReader();
+      reader.addEventListener('loadend', (e) => {
+        const text = e.srcElement.result;
+        var data = JSON.parse(text);
+        console.log(data);
+        // location.replace("./index.html");
+        if (data['topic'] == 'message') {
+          if (data['intent'] == 'path') {
+            utter = data['utterance'];
+            resp = data['response'][1];
+            locations = JSON.stringify(data['metadata']['locations']);
+            sessionStorage.setItem('utter', utter);
+            sessionStorage.setItem('response', resp);
+            sessionStorage.setItem('locations', locations);locations
+            window.location.href = './path.html';
+          }
+        }
+      });
+      // Start reading the blob as text.
+      reader.readAsText(event.data);
+    };
+  </script>
+
   <!-- Google Analytics: change UA-XXXXX-Y to be your site's ID. -->
   <script>
     window.ga = function () { ga.q.push(arguments) }; ga.q = []; ga.l = +new Date;
