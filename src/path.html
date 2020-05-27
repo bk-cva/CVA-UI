@@ -166,7 +166,7 @@
       max-height: 0;
     }
 
-    .reply:nth-child(2n - 1) {
+    .cva-reply {
       transform-origin: 0 50%;
       margin: 0.25em 1.5em 0.25em 1.5em !important;
       width: calc(100% - 3em);
@@ -175,7 +175,7 @@
       text-align: left;
     }
 
-    .reply:nth-child(2n - 1)::after {
+    .cva-reply::after {
       display: block;
       content: "";
       background: #58D68D;
@@ -296,7 +296,7 @@
       flex-wrap: wrap;
       flex-direction: column;
       padding: 1em;
-      overflow-y: scroll;
+      overflow: scroll;
       transition: all 0.3s;
       margin-top: 5%;
     }
@@ -349,8 +349,12 @@
                     <!-- <p>Chat bot section</p> -->
                     <div class="app">
                       <div class="reply">Hey Javis!</div>
-                      <div class="reply">Xin chào, mình có thể giúp gì cho bạn?</div>
-                      <div class="reply">Tôi muốn đi siêu thị</div>
+                      <div class="reply cva-reply">Xin chào, mình có thể giúp gì cho bạn?</div>
+                      <div class="reply cva-reply">Xin chào, mình có thể giúp gì cho bạn?</div>
+                      <div class="reply cva-reply">Xin chào, mình có thể giúp gì cho bạn?</div>
+                      <div class="reply cva-reply">Xin chào, mình có thể giúp gì cho bạn?</div>
+                      <div class="reply cva-reply">Xin chào, mình có thể giúp gì cho bạn?</div>
+                      <div class="reply cva-reply">Xin chào, mình có thể giúp gì cho bạn?</div>
                     </div>
                   </section>
                 </div>
@@ -377,6 +381,50 @@
   <!-- <script>window.jQuery || document.write('<script src="js/vendor/jquery-{{JQUERY_VERSION}}.min.js"><\/script>')</script> -->
   <script src="js/plugins.js"></script>
   <script src="js/main.js"></script>
+  <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+  <script>
+    function appendMessage(msg, cls) {
+      var message = document.createElement('div');
+      var content = document.createTextNode(msg);
+      $(message).append(content);
+      $(message).addClass(cls);
+      $('.app').append(message);
+    }
+    appendMessage(sessionStorage.getItem('utter'), 'reply');
+    appendMessage(sessionStorage.getItem('response'), 'reply cva-reply');
+    locations = sessionStorage.getItem('locations');
+    console.log(locations);
+    if (locations !== undefined) {
+      locations = JSON.parse(locations);
+      for (add of locations){
+        resp = appendMessage(add['title'], 'reply cva-reply');
+      }
+    }
+    var ws = new WebSocket("ws://192.168.0.171:5000/");
+    ws.onmessage = function (event) {
+      var reader = new FileReader();
+      reader.addEventListener('loadend', (e) => {
+        const text = e.srcElement.result;
+        var data = JSON.parse(text);
+        console.log(data);
+        utter = data['utterance'];
+        resp = data['response'][1];
+        appendMessage(utter, 'reply');
+        appendMessage(resp, 'reply cva-reply');
+        if (data['topic'] == 'message') {
+          if (data['intent'] == 'path') {
+            locations = data['metadata']['locations'];
+            for (add of locations){
+              resp = appendMessage(add['title'], 'reply cva-reply');
+            }
+          }
+        }
+      });
+      // Start reading the blob as text.
+      reader.readAsText(event.data);
+    };
+  </script>
+
 
   <!-- Google Analytics: change UA-XXXXX-Y to be your site's ID. -->
   <script>
