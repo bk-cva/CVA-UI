@@ -35,8 +35,6 @@ fetch(url)
     weather[0]["icon"]
     }.svg`;
 
-    console.log(data);
-
     const markup = `
     <h2 data-name="${name},${sys.country}">
         <span class="city-name">${name}</span>
