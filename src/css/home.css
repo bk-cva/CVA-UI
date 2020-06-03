@@ -1,0 +1,229 @@
+#time-bar {
+  font-size: medium;
+}
+
+.container-weather {
+  width: 100%;
+  max-width: 500px;
+  margin: 0 auto;
+  padding: 0 15px;
+}
+
+
+/* SECTION #2
+–––––––––––––––––––––––––––––––––––––––––––––––––– */
+.ajax-section {
+  margin: 10px 0 20px;
+}
+
+.ajax-section .city {
+  display: inline-block;
+  position: relative;
+  padding: 5px 10%;
+  border-radius: 20px;
+  background: var(--text_light);
+  color: var(--text_med);
+}
+
+.ajax-section .city::after {
+  content: '';
+  width: 90%;
+  height: 50px;
+  position: absolute;
+  bottom: -12px;
+  left: 5%;
+  z-index: -1;
+  opacity: 0.3;
+  border-radius: 20px;
+  background: var(--text_light);
+}
+
+.ajax-section .city h2 {
+  margin: 0 0 0 0;
+}
+
+.ajax-section .city-name {
+  display: inline-block;
+  margin-top: 10px;
+  margin-bottom: 0;
+}
+
+.ajax-section .city sup {
+  /* padding: 0.2em 0.6em; */
+  display: inline-block;
+  border-radius: 20px;
+  color: #ebe4e4;
+  background: #fd9800;
+  width: auto;
+  font-size: 0.5em;
+  padding: 0 5px 0 5px;
+}
+
+.ajax-section .weather-info{
+  display: inline-block;
+  margin-left: 30px;
+}
+
+.ajax-section .city-temp {
+  display: inline-block;
+  font-size: 3rem;
+  font-weight: bold;
+  color: var(--text_dark);
+  text-align: left;
+  /* float: left; */
+  margin-top: 20px;
+  margin-right: 20px;
+}
+
+.ajax-section .city-temp span {
+  display: inline-block;
+}
+
+.ajax-section .city-temp sup{
+  display: inline-block;
+  border-radius: 20px;
+  color: #ebe4e4;
+  background: #fd9800;
+  padding: 0 5px 0 5px;
+}
+
+.ajax-section .weather-figure {
+  margin: 0 5px 0 0;
+  float: right;
+}
+
+.ajax-section .weather-figure img{
+  width: 4em;
+  height: auto;
+  margin-right: 20px;
+  display: inline-block;
+}
+
+.ajax-section .weather-caption{
+  font-size: large;
+  text-transform: uppercase;
+  width: 10em;
+  height: auto;
+}
+
+
+/* MQ
+–––––––––––––––––––––––––––––––––––––––––––––––––– */
+@media screen and (max-width: 1000px) {
+  body {
+    padding: 30px;
+  }
+}
+
+@media screen and (max-width: 700px) {
+  .heading,
+  .ajax-section .city-temp {
+    font-size: 3rem;
+  }
+
+  .ajax-section {
+    margin-top: 20px;
+  }
+}
+
+@media screen and (max-width: 500px) {
+  body {
+    padding: 15px;
+  }
+}
+
+.intro-text {
+  font-size: large;
+}
+
+.function-block {
+  text-align: left;
+  width: inherit;
+  height: auto;
+  display: block;
+}
+
+.function-bar {
+  /* display: inline-block; */
+}
+
+.function-bar img {
+  display: inline-block;
+  text-align: left;
+
+}
+
+.function-bar h3 {
+  display: inline-block;
+  position: absolute;
+}
+
+.function-bar .calendar-icon {
+  width: 4em;
+  height: auto;
+  margin-right: 40px;
+  margin-left: 10px;
+}
+
+.function-bar .map-icon {
+  width: 3em;
+  height: auto;
+  margin-left: 20px;
+  margin-right: 50px;
+}
+
+.function-bar .music-icon {
+  width: 3em;
+  height: auto;
+  margin-left: 20px;
+  margin-right: 50px;
+  margin-top: 20px;
+}
+
+.function-bar .music-text {
+  margin-bottom: 0;
+  margin-top: 30px;
+}
+
+.function-bar .car-icon {
+  width: 3em;
+  height: auto;
+  margin-left: 20px;
+  margin-right: 50px;
+  margin-top: 10px;
+}
+
+.function-bar .car-text {
+  margin-bottom: 0;
+  margin-top: 25px;
+}
+
+.function-bar .news-icon {
+  width: 3em;
+  height: auto;
+  margin-left: 20px;
+  margin-right: 50px;
+  margin-top: 10px;
+}
+
+.function-bar .news-text {
+  margin-bottom: 0;
+  margin-top: 25px;
+}
+
+.function-bar .user-icon {
+  width: 3em;
+  height: auto;
+  margin-left: 20px;
+  margin-right: 50px;
+  margin-top: 10px;
+}
+
+.function-bar .user-text {
+  margin-bottom: 0;
+  margin-top: 25px;
+}
+
+.function-table {
+  display: inline-block;
+}

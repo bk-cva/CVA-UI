@@ -1,0 +1,107 @@
+.device  {
+  margin: auto;
+  margin-top: 40px;
+  margin-bottom: 40px;
+}
+
+.device .device-content {
+  overflow: hidden;
+  background: rgb(241, 238, 238);  /* fallback for old browsers */
+  /* background: -webkit-linear-gradient(to right, #29323c, #485563);  /* Chrome 10-25, Safari 5.1-6 */
+  /* background: linear-gradient(to right, #29323c, #485563); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+  /* background-image: url('img/mockuphone-iphonex-example.png'); */
+
+  background-size: contain;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+body {
+  background: #f3f3f3;
+  font-family: 'lato', 'Arial', sans-serif;
+  text-align: center;
+  padding: 0;
+  margin: 0;
+}
+.mup-container{
+  /* width: 100%; */
+  margin: auto;
+  max-width: 400px;
+
+}
+
+h1 {
+  color: #134E5E;
+  font-weight: 400;
+  font-size: 30px;
+  margin: 20px;
+}
+.instructions {
+  color: #666;
+}
+
+.drop-text {
+  z-index: 10;
+  width: 200px;
+  padding: 4px;
+  border-radius: 4px;
+  margin: auto;
+  top: 300px;
+  position: relative;
+  cursor: pointer;
+  color: #aaa;
+  background: rgba(0,0,0,0.1);
+}
+
+@-webkit-keyframes bummer {
+    100% {
+        -webkit-transform: scale(1,1);
+    }
+}
+
+@keyframes bummer {
+    100% {
+        transform: scale(1,1);
+    }
+}
+
+.animate {
+  -webkit-animation: bummer 0.6s;
+  animation: bummer 0.6s;
+  -webkit-transform: scale(0.3,0.3);
+  transform: scale(0.3,0.3);
+  -webkit-animation-fill-mode: forwards;
+  animation-fill-mode: forwards;
+}
+
+.animate-bg {
+  -webkit-transition: background-image 0.1s ease-in;
+  -moz-transition: background-image 0.1s ease-in;
+  -ms-transition: background-image 0.1s ease-in;
+  transition: background-image 0.1s ease-in;
+
+  -webkit-transition: background 0.1s ease-in;
+  -moz-transition: background 0.1s ease-in;
+  -ms-transition: background 0.1s ease-in;
+  transition: background 0.1s ease-in;
+}
+
+.avatar-bar {
+  text-align: left;
+}
+
+.avatar-bar .avatar-img {
+  display: inline-block;
+  margin-left: 10px;
+  margin-right: 70px;
+}
+
+.avatar-bar .avatar-text {
+  display: inline-block;
+  margin-left: 20px;
+}
+
+.avatar-text p {
+  margin-block-start: 0.2em;
+  margin-block-end: 0.2em;
+}
