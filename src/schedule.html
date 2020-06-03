@@ -15,12 +15,12 @@
   <link rel="stylesheet" href="css/main.css"> -->
   <link rel="stylesheet" type="text/css" href="css/devices.css" />
   <link rel="stylesheet" type="text/css" href="css/util_block.css" />
-  <link rel="stylesheet" type="text/css" href="css/home.css" />
+  <link rel="stylesheet" type="text/css" href="css/chat_box.css" />
 
   <meta name="theme-color" content="#fafafa">
 </head>
 
-<body onload="startTime()">
+<body>
 
   <!-- Add your site or application content here -->
   <div id="mup-container">
@@ -33,52 +33,20 @@
                 <div class="device-safe-area">
                   <div class="avatar-bar">
                     <div class="avatar-img">
-                      <img src="img/home-icon/avatar.png" alt="Couldn't get your avatar" width="35" height="35"
+                      <img src="img/home-icon/calendar.png" alt="Couldn't get your avatar" width="35" height="35"
                         padding-left="1">
                     </div>
                     <div class="avatar-text">
-                      <p>Xin chào Ring Ring!</p>
+                      <p>Quản lí lịch trình giúp bạn</p>
                     </div>
+                    <hr>
                   </div>
-                  <hr>
-                  <div class="info-bar">
-                    <div id="time-bar"></div>
-                    <div id="date-bar"></div>
-                    <!-- <div class="weather-info">Weather</div> -->
-                    <section class="ajax-section">
-                      <div class="container-weather">
-                        <div class="city"></div>
-                      </div>
-                    </section>
-                  </div>
-                  <hr>
-                  <h2 class="intro-text">Hãy gọi "hey Javis" tôi có thể giúp bạn:</h2>
-                  <div class="function-block">
-                    <div class="function-bar">
-                      <img class="calendar-icon" src="img/home-icon/calendar.png" alt="Couldn't get your avatar">
-                      <h3>Quản lí lịch trình giúp bạn</h3>
+                  <section class="hero is-info is-fullheight is-bold is-centered">
+                    <!-- <p>Chat bot section</p> -->
+                    <div class="app">
+                      <div class="reply cva-reply">Xin chào, mình có thể giúp gì cho bạn?</div>
                     </div>
-                    <div class="function-bar">
-                      <img class="map-icon" src="img/home-icon/map.png" alt="Couldn't get your avatar">
-                      <h3>Tìm đường giúp bạn</h3>
-                    </div>
-                    <div class="function-bar">
-                      <img class="music-icon" src="img/home-icon/player.jpg" alt="Couldn't get your avatar">
-                      <h3 class="music-text">Chơi nhạc theo yêu cầu</h3>
-                    </div>
-                    <div class="function-bar">
-                      <img class="car-icon" src="img/home-icon/car.png" alt="Couldn't get your avatar">
-                      <h3 class="car-text">Điều khiển thiết bị trên xe</h3>
-                    </div>
-                    <div class="function-bar">
-                      <img class="news-icon" src="img/home-icon/news.jpg" alt="Couldn't get your avatar">
-                      <h3 class="news-text">Cập nhật tin tức bạn muốn</h3>
-                    </div>
-                    <div class="function-bar">
-                      <img class="user-icon" src="img/home-icon/user.png" alt="Couldn't get your avatar">
-                      <h3 class="user-text">Ghi nhớ thông tin cá nhân của bạn</h3>
-                    </div>
-                  </div>
+                  </section>
                 </div>
               </div>
             </div>
@@ -95,7 +63,7 @@
 
   </div>
 
-  <script src="js/home-info.js"></script>
+  <!-- <script src="js/conversation.js"></script> -->
 
   <script src="http://zeptojs.com/zepto.min.js"></script>
   <!-- <script src="js/vendor/modernizr-{{MODERNIZR_VERSION}}.min.js"></script> -->
@@ -104,29 +72,32 @@
   <script src="js/plugins.js"></script>
   <script src="js/main.js"></script>
   <script src="js/utils.js"></script>
-
   <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
   <script>
+    // var objDiv = document.getElementsByClassName("app");
+    // objDiv.scrollTop = objDiv.scrollHeight;
+    appendMessage(sessionStorage.getItem('utter'), 'reply');
+    appendMessage(sessionStorage.getItem('response'), 'reply cva-reply');
     var ws = new WebSocket("ws://192.168.0.146:5000/");
     ws.onmessage = function (event) {
       var reader = new FileReader();
       reader.addEventListener('loadend', (e) => {
         const text = e.srcElement.result;
         var data = JSON.parse(text);
-        console.log(data);
-        // location.replace("./index.html");
         if (data['topic'] == 'message') {
-            navigate(data);
-            // window.location.href = './path.html';
+          navigate(data);
+          appendMessage(data['utterance'], 'reply');
+          appendMessage(data['response'][1], 'reply cva-reply');
         }
         else {
-          window.location.href = './home.html'
+          window.location.href = './home.html';
         }
       });
       // Start reading the blob as text.
       reader.readAsText(event.data);
     };
   </script>
+
 
   <!-- Google Analytics: change UA-XXXXX-Y to be your site's ID. -->
   <script>
