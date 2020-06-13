@@ -41,7 +41,7 @@
                     </div>
                     <hr>
                   </div>
-                  <section class="hero is-info is-fullheight is-bold is-centered">
+                  <section class="chat-box-section">
                     <!-- <p>Chat bot section</p> -->
                     <div class="app">
                       <div class="reply cva-reply">Xin chào, mình có thể giúp gì cho bạn?</div>
@@ -78,7 +78,7 @@
     // objDiv.scrollTop = objDiv.scrollHeight;
     appendMessage(sessionStorage.getItem('utter'), 'reply');
     appendMessage(sessionStorage.getItem('response'), 'reply cva-reply');
-    var ws = new WebSocket("ws://192.168.0.146:5000/");
+    var ws = new WebSocket(NLP_WS);
     ws.onmessage = function (event) {
       var reader = new FileReader();
       reader.addEventListener('loadend', (e) => {
