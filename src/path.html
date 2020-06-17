@@ -41,12 +41,16 @@
                     </div>
                     <hr>
                   </div>
-                  <section class="hero is-info is-fullheight is-bold is-centered">
+                  <section class="chat-box-section">
                     <!-- <p>Chat bot section</p> -->
                     <div class="app">
                       <div class="reply cva-reply">Xin chào, mình có thể giúp gì cho bạn?</div>
                     </div>
                   </section>
+                  <div class="map-block">
+                    <img class="map-image" width="100%" height="320px" src="img/home-icon/player.jpg"
+                      alt="Couldn't get your avatar">
+                  </div>
                 </div>
               </div>
             </div>
@@ -82,11 +86,20 @@
     sessionStorage.removeItem('location')
     if (locations !== undefined) {
       locations = JSON.parse(locations);
-      for (add of locations['locations']){
-        resp = appendMessage(add['address'], 'reply cva-reply');
-      }
+      console.log(locations);
+      map_image_url = getLocationsviewUrl(locations['locations']);
     }
-    var ws = new WebSocket("ws://192.168.0.146:5000/");
+    if (locations['routes']) {
+      route = locations['routes'][0]['actions'];
+      route.forEach(act => {
+        appendMessage(act['instruction'], 'reply cva-reply');
+      });
+      map_image_url = getRoutingviewUrl(locations['locations']);
+    }
+    $('.map-image').prop("src",map_image_url);
+
+    // Listen on websocket
+    var ws = new WebSocket(NLP_WS);
     ws.onmessage = function (event) {
       var reader = new FileReader();
       reader.addEventListener('loadend', (e) => {
@@ -97,18 +110,40 @@
           navigate(data);
           appendMessage(data['utterance'], 'reply');
           appendMessage(data['response'][1], 'reply cva-reply');
-          if (data['intent'] == 'path') {
+          if (data['intent'] == 'location') {
             locations = data['metadata']['locations'];
-            for (add of locations){
+            for (add of locations) {
               resp = appendMessage(add['address'], 'reply cva-reply');
             }
+            map_image_url = getLocationsviewUrl(locations);
+            $('.map-image').prop("src",full_mapview_url);
           }
-          else if (data['intent'] == "select_item"){
+          else if (data['intent'] == 'select_item') {
+            // appendMessage(data['metadata']['address'], 'reply cva-reply');
+            if (data['action'] == 'respond_route') {
+              route = data['metadata']['routes'][0]['actions'];
+              route.forEach(act => {
+                appendMessage(act['instruction'], 'reply cva-reply');
+              });
+              map_image_url = getRoutingviewUrl(data['metadata']['locations']);
+            }
+            else {
+              map_image_url = getLocationsviewUrl(data['metadata']['locations']);
+            }
+          }
+          else if (data['intent'] == "path") {
+            locations = data['metadata']['locations'];
+            locations.forEach(location => {
+              appendMessage(location['address'], 'reply cva-reply');
+            });
+            map_image_url = getRoutingviewUrl(data['metadata']['locations']);
             route = data['metadata']['routes'][0]['actions'];
             route.forEach(act => {
               appendMessage(act['instruction'], 'reply cva-reply');
             });
           }
+        $('.map-image').prop("src",map_image_url);
+
         }
         else {
           window.location.href = './home.html'
@@ -122,7 +157,7 @@
   <!-- Google Analytics: change UA-XXXXX-Y to be your site's ID. -->
   <script>
     window.ga = function () { ga.q.push(arguments) }; ga.q = []; ga.l = +new Date;
-    ga('create', 'UA-XXXXX-Y', 'auto'); ga('set', 'anonymizeIp', true); ga('set','transport','beacon'); ga('send', 'pageview')
+    ga('create', 'UA-XXXXX-Y', 'auto'); ga('set', 'anonymizeIp', true); ga('set', 'transport', 'beacon'); ga('send', 'pageview')
   </script>
   <script src="https://www.google-analytics.com/analytics.js" async></script>
 </body>
