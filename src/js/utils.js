@@ -1,6 +1,7 @@
-const NLP_WS = 'ws://localhost:5000/'
-const NLP_HTTP = 'http://localhost:5000/cva'
-const HERE_API_KEY = 'gOTlDv3usI61h9jQhUdcp8E9Yo8u9Ww1AFZ3fBmx0oE'
+const NLP_WS = 'ws://192.168.1.3:5000/';
+const NLP_HTTP = 'http://192.168.1.3:5000/cva';
+const HERE_API_KEY = 'gOTlDv3usI61h9jQhUdcp8E9Yo8u9Ww1AFZ3fBmx0oE';
+const MY_LOCATION = [10.760338,106.6613418];
 
 function appendMessage(msg, cls) {
   var message = document.createElement('div');
@@ -36,6 +37,35 @@ function navigate(data) {
   }
 }
 
+function getLocationsviewUrl(locations) {
+  mapview_url = 'https://image.maps.ls.hereapi.com/mia/1.6/mapview';
+  list_location = '';
+  for (add of locations) {
+    resp = appendMessage(add['address'], 'reply cva-reply');
+    list_location = list_location +
+      add['latitude'] +
+      ',' + add['longitude'] + ',';
+  }
+  list_location = list_location.replace(/(,$)/g, '');
+  full_mapview_url = `${mapview_url}?poi=${list_location}&apiKey=${HERE_API_KEY}`
+  return full_mapview_url;
+}
+
+function getRoutingviewUrl(location) {
+  routing_url = 'https://image.maps.ls.hereapi.com/mia/1.6/routing' +
+                      `?apiKey=${HERE_API_KEY}` +
+                      `&waypoint0=${MY_LOCATION[0]},${MY_LOCATION[1]}` +
+                      `&waypoint1=${location[0]['latitude']},${location[0]['longitude']}` +
+                      `&poix0=${MY_LOCATION[0]},${MY_LOCATION[1]};00a3f2;00a3f2;11;.` +
+                      `&poix1=${location[0]['latitude']},${location[0]['longitude']};white;white;11;.` +
+                      '&lc=1652B4' +
+                      '&lw=6' +
+                      '&t=0' +
+                      '&ppi=320' +
+                      '&w=400' +
+                      '&h=600';
+    return routing_url;
+}
 
 $(document).ready(function () {
   $('.device-safe-area').append('<div class="send-box"></div>');
@@ -60,7 +90,7 @@ $(document).ready(
         type: 'POST',
         url: NLP_HTTP,
         data: data,
-        success: function (data) { console.log(data); },
+        success: function (data) { console.log('Submit success!'); },
         contentType: "application/json",
         dataType: 'json'
       });
@@ -80,7 +110,7 @@ $(document).ready(
         type: 'POST',
         url: NLP_HTTP,
         data: data,
-        success: function (data) { console.log(data); },
+        success: function (data) { console.log('Reset success'); },
         contentType: "application/json",
         dataType: 'json'
       });
