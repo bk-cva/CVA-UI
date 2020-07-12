@@ -1,5 +1,5 @@
-const NLP_WS = 'ws://192.168.1.3:5000/';
-const NLP_HTTP = 'http://192.168.1.3:5000/cva';
+const NLP_WS = 'ws://192.168.0.150:5000/';
+const NLP_HTTP = 'http://192.168.0.150:5000/cva';
 const HERE_API_KEY = 'gOTlDv3usI61h9jQhUdcp8E9Yo8u9Ww1AFZ3fBmx0oE';
 const MY_LOCATION = [10.760338,106.6613418];
 
@@ -35,6 +35,14 @@ function navigate(data) {
       window.location.href = './news.html';
     }
   }
+  else if (data['intent'] == 'control_aircon' ||
+    data['intent'] == 'control_radio' ||
+    data['intent'] == 'control_door' ||
+    data['intent'] == 'control_window') {
+      if (current_page !== 'command.html') {
+        window.location.href = './command.html';
+      }
+    }
 }
 
 function getLocationsviewUrl(locations) {
