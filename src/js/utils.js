@@ -1,5 +1,5 @@
-const NLP_WS = 'ws://192.168.0.150:5000/';
-const NLP_HTTP = 'http://192.168.0.150:5000/cva';
+const NLP_WS = 'ws://118.69.144.206:5050/';
+const NLP_HTTP = 'http://118.69.144.206:5050/cva';
 const HERE_API_KEY = 'gOTlDv3usI61h9jQhUdcp8E9Yo8u9Ww1AFZ3fBmx0oE';
 const MY_LOCATION = [10.760338,106.6613418];
 
@@ -33,6 +33,11 @@ function navigate(data) {
   else if (data['intent'] == 'request_news') {
     if (current_page !== 'news.html') {
       window.location.href = './news.html';
+    }
+  }
+  else if (data['intent'] == 'music') {
+    if (current_page !== 'player.html') {
+      window.location.href = './player.html';
     }
   }
   else if (data['intent'] == 'control_aircon' ||
