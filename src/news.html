@@ -1,0 +1,110 @@
+<!doctype html>
+<html class="no-js" lang="">
+
+<head>
+  <meta charset="utf-8">
+  <title></title>
+  <meta name="description" content="">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <link rel="manifest" href="site.webmanifest">
+  <link rel="apple-touch-icon" href="icon.png">
+  <!-- Place favicon.ico in the root directory -->
+
+  <!-- <link rel="stylesheet" href="css/normalize.css">
+  <link rel="stylesheet" href="css/main.css"> -->
+  <link rel="stylesheet" type="text/css" href="css/devices.css" />
+  <link rel="stylesheet" type="text/css" href="css/util_block.css" />
+  <link rel="stylesheet" type="text/css" href="css/chat_box.css" />
+
+  <meta name="theme-color" content="#fafafa">
+</head>
+
+<body>
+
+  <!-- Add your site or application content here -->
+  <div id="mup-container">
+    <div id="iphone-x" class="container grid-xl text-center">
+      <div class="columns">
+        <div class="column col-12">
+          <div class="device device-iphone-x animate">
+            <div class="device-frame">
+              <div class="device-content">
+                <div class="device-safe-area">
+                  <div class="avatar-bar">
+                    <div class="avatar-img">
+                      <img src="img/home-icon/news.jpg" alt="Couldn't get your avatar" width="35" height="35"
+                        padding-left="1">
+                    </div>
+                    <div class="avatar-text">
+                      <p><b>Cập nhật tin tức hằng ngày</b></p>
+                    </div>
+                    <hr>
+                  </div>
+                  <section class="chat-box-section">
+                    <!-- <p>Chat bot section</p> -->
+                    <div class="app">
+                      <div class="reply cva-reply">Xin chào, mình có thể giúp gì cho bạn?</div>
+                    </div>
+                  </section>
+                </div>
+              </div>
+            </div>
+            <div class="device-stripe"></div>
+            <div class="device-header"></div>
+            <div class="device-sensors"></div>
+            <div class="device-btns"></div>
+            <div class="device-power"></div>
+            <div class="device-home"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- <script src="js/conversation.js"></script> -->
+
+  <script src="http://zeptojs.com/zepto.min.js"></script>
+  <!-- <script src="js/vendor/modernizr-{{MODERNIZR_VERSION}}.min.js"></script> -->
+  <!-- <script src="https://code.jquery.com/jquery-{{JQUERY_VERSION}}.min.js" integrity="{{JQUERY_SRI_HASH}}" crossorigin="anonymous"></script> -->
+  <!-- <script>window.jQuery || document.write('<script src="js/vendor/jquery-{{JQUERY_VERSION}}.min.js"><\/script>')</script> -->
+  <script src="js/plugins.js"></script>
+  <script src="js/main.js"></script>
+  <script src="js/utils.js"></script>
+  <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+  <script>
+    // var objDiv = document.getElementsByClassName("app");
+    // objDiv.scrollTop = objDiv.scrollHeight;
+    appendMessage(sessionStorage.getItem('utter'), 'reply');
+    appendMessage(sessionStorage.getItem('response'), 'reply cva-reply');
+    var ws = new WebSocket(NLP_WS);
+    ws.onmessage = function (event) {
+      var reader = new FileReader();
+      reader.addEventListener('loadend', (e) => {
+        const text = e.srcElement.result;
+        var data = JSON.parse(text);
+        if (data['topic'] == 'message') {
+          navigate(data);
+          appendMessage(data['utterance'], 'reply');
+          appendMessage(data['response'][1], 'reply cva-reply');
+        }
+        else {
+          window.location.href = './home.html';
+        }
+      });
+      // Start reading the blob as text.
+      reader.readAsText(event.data);
+    };
+  </script>
+
+
+  <!-- Google Analytics: change UA-XXXXX-Y to be your site's ID. -->
+  <script>
+    window.ga = function () { ga.q.push(arguments) }; ga.q = []; ga.l = +new Date;
+    ga('create', 'UA-XXXXX-Y', 'auto'); ga('set', 'anonymizeIp', true); ga('set','transport','beacon'); ga('send', 'pageview')
+  </script>
+  <script src="https://www.google-analytics.com/analytics.js" async></script>
+</body>
+
+</html>
