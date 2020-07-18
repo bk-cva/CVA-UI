@@ -116,7 +116,7 @@
               resp = appendMessage(add['address'], 'reply cva-reply');
             }
             map_image_url = getLocationsviewUrl(locations);
-            $('.map-image').prop("src",full_mapview_url);
+            $('.map-image').prop("src", map_image_url);
           }
           else if (data['intent'] == 'select_item') {
             // appendMessage(data['metadata']['address'], 'reply cva-reply');
