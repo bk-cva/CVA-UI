@@ -88,6 +88,12 @@
           navigate(data);
           appendMessage(data['utterance'], 'reply');
           appendMessage(data['response'][1], 'reply cva-reply');
+          if (data['action'] == 'select_schedule' | data['action'] == 'respond_request_schedule') {
+            for (s of data['metadata']['events']) {
+              t = new Date(s['start']['dateTime']);
+              appendMessage(`${s['summary']} lúc ${t.getHours()} ${t.getMinutes()} ngày ${t.getDate()}-${t.getMonth()}`, 'reply cva-reply');
+            }
+          }
         }
         else {
           window.location.href = './home.html';
@@ -102,7 +108,7 @@
   <!-- Google Analytics: change UA-XXXXX-Y to be your site's ID. -->
   <script>
     window.ga = function () { ga.q.push(arguments) }; ga.q = []; ga.l = +new Date;
-    ga('create', 'UA-XXXXX-Y', 'auto'); ga('set', 'anonymizeIp', true); ga('set','transport','beacon'); ga('send', 'pageview')
+    ga('create', 'UA-XXXXX-Y', 'auto'); ga('set', 'anonymizeIp', true); ga('set', 'transport', 'beacon'); ga('send', 'pageview')
   </script>
   <script src="https://www.google-analytics.com/analytics.js" async></script>
 </body>

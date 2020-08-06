@@ -113,7 +113,7 @@ h1 {
 }
 
 form {
-  /* visibility: hidden; */
+  visibility: hidden;
   background: #000;
   padding: 3px;
   position: relative;
