@@ -76,5 +76,7 @@
     "modernizr-config.json",
     "README.md"
   ],
-  "dependencies": {}
+  "dependencies": {
+    "express": "^4.17.1"
+  }
 }

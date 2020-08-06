@@ -164,7 +164,7 @@ gulp.task(
 gulp.task(
   'build',
   gulp.series(
-    gulp.parallel('clean', 'lint:js'),
+    'clean',
     'copy',
     'modernizr'
   )
